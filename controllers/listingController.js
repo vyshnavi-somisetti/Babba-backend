@@ -3,16 +3,17 @@ const Listing = require("../models/Listing");
 // Create Listing
 const createListing = async (req, res) => {
   try {
-    const { title, description, price } = req.body;
+    const { title, description, price,category } = req.body;
 
-    const listing = await Listing.create({
+    const newListing = await Listing.create({
       title,
       description,
       price,
+      category,
       user: req.user.id,
     });
 
-    res.status(201).json(listing);
+    res.status(201).json(newListing);
   } catch (error) {
     res.status(500).json({
       message: error.message,
