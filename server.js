@@ -1,3 +1,4 @@
+const orderRoutes = require("./models/routes/orderRoutes");
 const categoryRoutes = require("./models/routes/categoryRoutes");
 const userRoutes = require("./models/routes/userRoutes");
 const express = require("express");
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/listings", listingRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/orders", orderRoutes);
 app.get("/", (req, res) => {
   res.send("BabbaFly Backend Running");
 });

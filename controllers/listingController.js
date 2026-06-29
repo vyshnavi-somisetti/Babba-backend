@@ -3,14 +3,15 @@ const Listing = require("../models/Listing");
 // Create Listing
 const createListing = async (req, res) => {
   try {
-    const { title, description, price,category } = req.body;
+    const { title, description, price,category,location } = req.body;
 
     const newListing = await Listing.create({
       title,
       description,
       price,
       category,
-      user: req.user.id,
+      location,
+      user: "6a302dab9a204d6065b45aff",
     });
 
     res.status(201).json(newListing);
@@ -24,16 +25,34 @@ const createListing = async (req, res) => {
 // Get All Listings
 const getListings = async (req, res) => {
   try {
-    const listings = await Listing.find().populate(
-      "user",
-      "name email"
-    );
+    const filter = {};
+
+    if (req.query.location) {
+      filter.location = { $regex: req.query.location, $options: 'i' };
+    }
+
+    if (req.query.minPrice && req.query.maxPrice) {
+      filter.price = {
+        $gte: Number(req.query.minPrice),
+        $lte: Number(req.query.maxPrice),
+      };
+    }
+
+    let query = Listing.find(filter);
+
+    if (req.query.sort === "latest") {
+      query = query.sort({ createdAt: -1 });
+    } else if (req.query.sort === "price_low") {
+      query = query.sort({ price: 1 });
+    } else if (req.query.sort === "price_high") {
+      query = query.sort({ price: -1 });
+    }
+
+    const listings = await query;
 
     res.json(listings);
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    res.status(500).json({ message: error.message });
   }
 };
 

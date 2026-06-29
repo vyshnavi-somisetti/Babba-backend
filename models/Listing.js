@@ -23,6 +23,12 @@ const listingSchema = new mongoose.Schema(
       required: true,
     },
 
+    location: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
