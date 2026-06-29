@@ -4,7 +4,7 @@ const router = express.Router();
 const {
   getCategories,
   getListingsByCategory,
-} = require("../../controllers/categoryControllers");
+} = require("../controllers/categoryControllers");
 
 router.get("/", getCategories);
 router.get("/:id/listings", getListingsByCategory);

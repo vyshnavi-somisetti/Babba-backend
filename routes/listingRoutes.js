@@ -4,8 +4,8 @@ const { createListing,
     getListingById,
     updateListing,
     deleteListing,
- } = require("../../controllers/listingController");
-const protect = require("../../middleware/authMiddleware");
+ } = require("../controllers/listingController");
+const protect = require("../middleware/authMiddleware");
 
 const router = express.Router();
 router.get("/", getListings);

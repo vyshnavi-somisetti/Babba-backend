@@ -6,7 +6,7 @@ const {
   createOrder,
   getUserOrders,
   getOrderById,
-} = require("../../controllers/orderController");
+} = require("../controllers/orderController");
 
 router.post("/", createOrder);
 router.get("/:userId", getUserOrders);

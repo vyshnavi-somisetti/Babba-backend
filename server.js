@@ -1,10 +1,10 @@
-const orderRoutes = require("./models/routes/orderRoutes");
-const categoryRoutes = require("./models/routes/categoryRoutes");
-const userRoutes = require("./models/routes/userRoutes");
+const orderRoutes = require("./routes/orderRoutes");
+const categoryRoutes = require("./routes/categoryRoutes");
+const userRoutes = require("./routes/userRoutes");
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
-const listingRoutes = require("./models/routes/listingRoutes");
+const listingRoutes = require("./routes/listingRoutes");
 dotenv.config();
 
 connectDB();
