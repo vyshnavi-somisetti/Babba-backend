@@ -1,8 +1,16 @@
+const listingSchema = require("../validation/listingValidation");
 const Listing = require("../models/Listing");
 
 // Create Listing
 const createListing = async (req, res) => {
   try {
+    const { error } = listingSchema.validate(req.body);
+
+    if (error) {
+      return res.status(400).json({
+        message: error.details[0].message,
+    });
+  }
     const { title, description, price,category,location } = req.body;
 
     const newListing = await Listing.create({
